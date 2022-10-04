@@ -8,4 +8,6 @@ public class User {
     password = pwd;
     ArrayList<Recipe> myRB = new ArrayList<Recipe>();
    }
+
+   
 }
