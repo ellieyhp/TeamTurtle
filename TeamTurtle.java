@@ -11,6 +11,8 @@ public class TeamTurtle {
 
     //scroll function to explore other recipes
 
+    ArrayList<Recipe> recipeBook; 
+
     public static void main(String[] args) {
         ArrayList<Recipe> recipeBook = new ArrayList<Recipe>();
         Scanner s = new Scanner(System.in);
@@ -29,4 +31,14 @@ public class TeamTurtle {
         recipeBook.add(Recipe.createRecipe(title, description, ingredients, instructions));
 
     }
+
+    public static ArrayList<Recipe> search(String input) { 
+        ArrayList<Recipe> searchResults = new ArrayList<Recipe>(); 
+        for (Recipe r: recipeBook) { 
+            if (r.title.matches("(.*)" + input + "(.*")) {
+              searchResults.add(recipe);
+            }
+        }
+        return searchResults; 
+    } 
 }
