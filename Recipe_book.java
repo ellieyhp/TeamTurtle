@@ -1,9 +1,11 @@
 package team_turtle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.awt.event.*;
 import javax.swing.*;
+
 
 public class Recipe_book {
 	
@@ -13,10 +15,6 @@ public class Recipe_book {
 	//make new Recipe Book object
 	Recipe_book() {
 			rb = new HashMap<String,Recipe_entry>();
-
-		//Recipe_book ro = new Recipe_book();
-		//ro.init();
-		//return rb;
 	}
 	
 	void init() {
@@ -38,10 +36,40 @@ public class Recipe_book {
 				sub.setBounds(150,400,300,120);
 				sr.add(sub);
 				
-				
 				sub.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						rb.get(key.getText()).re_print();
+						Recipe_entry temp = rb.get(key.getText());
+						JFrame pr = new JFrame("textfield");
+						String out;
+						if(temp != null) {
+							out = temp.re_print();
+						}
+						else {
+							out = "Recipe Not Available";
+						}
+						JTextArea ldis = new JTextArea(out);
+						JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+								JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+						pr.add(scroll);
+						ldis.setBounds(150,100,300,500);
+						ldis.setEditable(false);
+						pr.add(ldis);
+						
+						JButton bm = new JButton("Back to Menu");
+						bm.setBounds(150,600,300,120);
+						bm.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								pr.dispose();
+							}
+						});
+						
+						pr.add(bm);
+						
+						pr.setSize(600, 800);
+						pr.setLayout(null);
+						pr.setVisible(true);
+						pr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						
 					}
 				});
 				
@@ -67,10 +95,32 @@ public class Recipe_book {
 			public void actionPerformed(ActionEvent e) {
 				//print recipes
 				JFrame pr = new JFrame("textfield");
-
+				String out = "";
 				for (String key: rb.keySet()) {
-					rb.get(key).re_print();
+					out = out.concat(rb.get(key).re_print()+"\n\n");
 				}
+				JTextArea ldis = new JTextArea(out);
+				JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+						JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+				pr.add(scroll);
+				ldis.setBounds(150,100,300,500);
+				ldis.setEditable(false);
+				pr.add(ldis);
+				
+				JButton bm = new JButton("Back to Menu");
+				bm.setBounds(150,600,300,120);
+				bm.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						pr.dispose();
+					}
+				});
+				
+				pr.add(bm);
+				
+				pr.setSize(600, 800);
+				pr.setLayout(null);
+				pr.setVisible(true);
+				pr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 		JButton add = new JButton("Add Recipe");
@@ -114,7 +164,7 @@ public class Recipe_book {
 						public void actionPerformed(ActionEvent e) {
 							String n = name.getText();
 							String de = desc.getText();
-							String ingl = inl.getText();
+							String ingl = il.getText();
 							String instr = inst.getText();
 							Recipe_entry re = new Recipe_entry(n,de,ingl,instr);
 							rb.put(n, re);
@@ -132,6 +182,35 @@ public class Recipe_book {
 		
 		JButton des = new JButton("About Us");
 		des.setBounds(250,675,100,40);
+		
+		des.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame ta = new JFrame("Text Area");
+				String spiel = "Our Story";
+				JTextArea au = new JTextArea(spiel);
+				JScrollPane scroll = new JScrollPane (au, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+						JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+				ta.add(scroll);
+				au.setBounds(150,100,300,500);
+				au.setEditable(false);
+				ta.add(au);
+				
+				JButton bm = new JButton("Back to Menu");
+				bm.setBounds(150,600,300,120);
+				bm.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ta.dispose();
+					}
+				});
+				
+				ta.add(bm);
+				
+				ta.setSize(600, 800);
+				ta.setLayout(null);
+				ta.setVisible(true);
+				ta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			}
+		});
 		
 		f1.add(s);
 		
@@ -171,8 +250,8 @@ public class Recipe_book {
 		String re_print() {
 			String out = "Name:\t"+re[0]+"\nDescription:\t"+re[1]
 					+ "\nIngredient List:\t"+re[2]+"\n"
-							+ "Instructions:\t"+re[3];
-			System.out.println(out);
+							+ "Instructions:\t"+re[3]+"\n";
+			//System.out.println(out);
 			return out;
 		}
 	}
