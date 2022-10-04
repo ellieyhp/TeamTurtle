@@ -114,7 +114,7 @@ public class Recipe_book {
 						public void actionPerformed(ActionEvent e) {
 							String n = name.getText();
 							String de = desc.getText();
-							String ingl = inl.getText();
+							String ingl = il.getText();
 							String instr = inst.getText();
 							Recipe_entry re = new Recipe_entry(n,de,ingl,instr);
 							rb.put(n, re);
