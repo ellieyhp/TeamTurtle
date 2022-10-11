@@ -19,14 +19,14 @@ public class Recipe_book {
 	
 	void init() {
 
-		JFrame f1 = new JFrame("Button");
+		JFrame f1 = new JFrame("Recipe Book");
 
 		JButton s = new JButton("Search Recipes");
 		s.setBounds(150, 100, 300, 120);
 		s.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//print recipes
-				JFrame sr = new JFrame("textfield");
+				JFrame sr = new JFrame("Search Recipes");
 
 				JTextField key = new JTextField("Name");
 				key.setBounds(150,200,300,20);
@@ -48,12 +48,13 @@ public class Recipe_book {
 							out = "Recipe Not Available";
 						}
 						JTextArea ldis = new JTextArea(out);
-						JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-								JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-						pr.add(scroll);
 						ldis.setBounds(150,100,300,500);
 						ldis.setEditable(false);
 						pr.add(ldis);
+						//JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+								//JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+						//scroll.setBounds(300,100,20,400);
+						//pr.add(scroll);
 						
 						JButton bm = new JButton("Back to Menu");
 						bm.setBounds(150,600,300,120);
@@ -94,7 +95,7 @@ public class Recipe_book {
 		list.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//print recipes
-				JFrame pr = new JFrame("textfield");
+				JFrame pr = new JFrame("See All Recipes");
 				String out = "";
 				for (String key: rb.keySet()) {
 					out = out.concat(rb.get(key).re_print()+"\n\n");
@@ -128,7 +129,7 @@ public class Recipe_book {
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//add recipe
-					JFrame tf = new JFrame("textfield");
+					JFrame tf = new JFrame("Add Recipe");
 					JPanel p = new JPanel();
 					
 					JTextField name = new JTextField("Name");
@@ -185,7 +186,7 @@ public class Recipe_book {
 		
 		des.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame ta = new JFrame("Text Area");
+				JFrame ta = new JFrame("About Us");
 				String spiel = "Our Story";
 				JTextArea au = new JTextArea(spiel);
 				JScrollPane scroll = new JScrollPane (au, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
