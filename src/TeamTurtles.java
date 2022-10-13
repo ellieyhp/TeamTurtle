@@ -1,6 +1,9 @@
 import java.util.*;
 import java.util.Scanner;
-public class TeamTurtle { 
+
+
+
+public class TeamTurtles { 
  //search for the recipe
     /*Firstly, they can search for a
     recipe by name (exact string comparison is acceptable, though substring matching,
@@ -11,10 +14,10 @@ public class TeamTurtle {
 
     //scroll function to explore other recipes
 
-    ArrayList<Recipe> recipeBook; 
+    static ArrayList<Recipe> recipeBook; 
 
     public static void main(String[] args) {
-        ArrayList<Recipe> recipeBook = new ArrayList<Recipe>();
+        // ArrayList<Recipe> recipeBook = new ArrayList<Recipe>();
         Scanner s = new Scanner(System.in);
 
         //create a new recipe
@@ -28,7 +31,7 @@ public class TeamTurtle {
         System.out.println("Please enter step-by-step instruction of your recipe, each step separated by comma: ");       
         String instructions = s.nextLine();
         
-        recipeBook.add(Recipe.createRecipe(title, description, ingredients, instructions));
+        Recipe.createRecipe(title, description, ingredients, instructions);
 
     }
 
@@ -36,9 +39,11 @@ public class TeamTurtle {
         ArrayList<Recipe> searchResults = new ArrayList<Recipe>(); 
         for (Recipe r: recipeBook) { 
             if (r.title.matches("(.*)" + input + "(.*")) {
-              searchResults.add(recipe);
+              searchResults.add(r);
             }
         }
         return searchResults; 
     } 
+
+
 }
