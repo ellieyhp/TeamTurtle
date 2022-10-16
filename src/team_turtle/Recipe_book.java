@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.awt.event.*;
 import javax.swing.*;
 
+import team_turtle.Recipe;
 
 public class Recipe_book {
 	
@@ -38,7 +39,8 @@ public class Recipe_book {
 				
 				sub.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Recipe_entry temp = rb.get(key.getText());
+						//Recipe_entry temp = rb.get(key.getText());
+						Recipe_entry temp = Search.search(key.getText());
 						JFrame pr = new JFrame("textfield");
 						String out;
 						if(temp != null) {
@@ -97,8 +99,14 @@ public class Recipe_book {
 				//print recipes
 				JFrame pr = new JFrame("See All Recipes");
 				String out = "";
+				/*
 				for (String key: rb.keySet()) {
 					out = out.concat(rb.get(key).re_print()+"\n\n");
+				}
+				*/
+
+				for(int i = 0; i < Search.recipeBook.size(); i++) {
+					out = out.concat(Search.recipeBook.get(i)+"\n\n");
 				}
 				JTextArea ldis = new JTextArea(out);
 				JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -147,19 +155,19 @@ public class Recipe_book {
 					
 					JLabel inl = new JLabel("Ingredient List");
 					tf.add(inl);
-					JTextField il = new JTextField("Ingredient List");
+					JTextField il = new JTextField("Ingredient List: Please separate by semicolon");
 					il.setBounds(150,400,300,20);
 					tf.add(il);
 					
 					JLabel ins = new JLabel("Instructions");
 					tf.add(ins);
-					JTextField inst = new JTextField("Instructions");
+					JTextField inst = new JTextField("Instructions: Please separate by semicolon");
 					inst.setBounds(150,500,300,20);
 					tf.add(inst);
 					//f1.add(name);
-					
+
 					JButton sub = new JButton("Submit");
-					sub.setBounds(250,600,120,40);
+					sub.setBounds(240,540,120,40);
 					tf.add(sub);
 					sub.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -167,12 +175,25 @@ public class Recipe_book {
 							String de = desc.getText();
 							String ingl = il.getText();
 							String instr = inst.getText();
-							Recipe_entry re = new Recipe_entry(n,de,ingl,instr);
-							rb.put(n, re);
+							//Recipe_entry re = new Recipe_entry(n,de,ingl,instr);
+							//rb.put(n, re);
+	
+							Recipe r = new Recipe(n,ingl,de,instr);
+							r.Recipe.createRecipe();
+
 							tf.dispose();
 						}
 					});
-					
+
+					JButton bm = new JButton("Back to Menu");
+					bm.setBounds(150,600,300,120);
+					bm.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							tf.dispose();
+						}
+					});
+						
+					tf.add(bm);
 					tf.add(p);
 					tf.setSize(600, 800);
 					tf.setLayout(null);
@@ -258,4 +279,3 @@ public class Recipe_book {
 	}
 
 }
-
