@@ -38,12 +38,12 @@ public class Recipe_book {
 						Search.fillRecipeBook();
 
 						ArrayList<Entry> temp = Search.search(key.getText());
-						JFrame pr = new JFrame("textfield");
+						JFrame pr = new JFrame("Search Recipes");
 						String out = "";
 						if(temp != null) {
 							for (int i = 0; i < temp.size(); i++) {
 								Entry u = temp.get(i);
-								out.concat("Name: "+u.title+"\n"+
+								out = out.concat("Name: "+u.title+"\n"+
 								"Description: "+u.description+"\n"+
 								"Ingredient List: "+u.ingredients+"\n"+
 								"Instructions: "+u.instructions+"\n\n");
@@ -54,7 +54,7 @@ public class Recipe_book {
 							out = "Recipe Not Available";
 						}
 						JTextArea ldis = new JTextArea(out);
-						ldis.setBounds(150,100,300,500);
+						ldis.setBounds(10,100,580,500);
 						ldis.setEditable(false);
 						pr.add(ldis);
 						//JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -117,17 +117,17 @@ public class Recipe_book {
 
 				for (int i = 0; i < temp.size(); i++) {
 					Entry u = temp.get(i);
-					out.concat("Name: "+u.title+"\n"+
+					out = out.concat("Name: "+u.title+"\n"+
 					"Description: "+u.description+"\n"+
 					"Ingredient List: "+u.ingredients+"\n"+
 					"Instructions: "+u.instructions+"\n\n");
+				System.out.println("out: \n"+u.title);
 				}
-	
 				JTextArea ldis = new JTextArea(out);
 				JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 						JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 				pr.add(scroll);
-				ldis.setBounds(150,100,300,500);
+				ldis.setBounds(10,100,580,500);
 				ldis.setEditable(false);
 				pr.add(ldis);
 				
@@ -170,13 +170,13 @@ public class Recipe_book {
 					
 					JLabel inl = new JLabel("Ingredient List");
 					tf.add(inl);
-					JTextField il = new JTextField("Ingredient List: Please separate by semicolon");
+					JTextField il = new JTextField("Ingredient List: Please separate by comma");
 					il.setBounds(150,400,300,20);
 					tf.add(il);
 					
 					JLabel ins = new JLabel("Instructions");
 					tf.add(ins);
-					JTextField inst = new JTextField("Instructions: Please separate by semicolon");
+					JTextField inst = new JTextField("Instructions: Please separate by comma");
 					inst.setBounds(150,500,300,20);
 					tf.add(inst);
 					//f1.add(name);
@@ -219,13 +219,18 @@ public class Recipe_book {
 			}
 		});
 		
-		JButton des = new JButton("About Us");
+		JButton des = new JButton("User Guide");
 		des.setBounds(250,675,100,40);
 		
 		des.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame ta = new JFrame("About Us");
-				String spiel = "Our Story";
+				JFrame ta = new JFrame("User Guide");
+				String spiel = "To add a recipe, press \"Add Recipe\".\n"+
+				"Then enter the name, description, ingredient \nlist (separated by commas),\n"+
+				"and instructions for the recipe (separated by \ncommas).\n\nTo search recipes,"+
+				" press \"Search Recipes\", \ntype the name of the recipe you’re searching \nfor where "+
+				"it says \"Name\", and press \"Search\"."+
+				"\n\nTo see all recipes, press \"See All Recipes\".";
 				JTextArea au = new JTextArea(spiel);
 				JScrollPane scroll = new JScrollPane (au, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 						JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
