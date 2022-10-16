@@ -60,7 +60,7 @@ public class Search {
         
         JSONParser parser = new JSONParser(); 
         
-        try (FileReader reader = new FileReader("team_turtle/recipes.json")) { 
+        try (FileReader reader = new FileReader("recipes.json")) { 
             JSONObject obj = (JSONObject) parser.parse(reader); 
             JSONArray recipes = (JSONArray) obj.get("Recipe") ; 
             System.out.println(recipes); 
