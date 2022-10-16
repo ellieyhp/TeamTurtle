@@ -16,42 +16,34 @@ import org.json.simple.parser.ParseException;
 //and step-by-step cooking instructions. 
 public class Recipe {
     String title;
-    ArrayList<String> ingredients;
+    String ingredients;
     String description;
-    ArrayList<String> instructions;
+    String instructions;
 
-    public Recipe(String title, ArrayList<String> ingredients, String description, ArrayList<String> instructions) {
+    public Recipe(String title, String ingredients, String description, String instructions) {
         this.title = title;
         this.ingredients = ingredients;
         this.description = description;
         this.instructions = instructions;
     }
 
-    /*
-     * Good to use if trying to serialize recipes
-     * public static synchronized String createID() {
-     * return String.valueOf(++idCounter);
-     * }
-     */
     public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
         // Test saving recipe to recipes.json file
-        createRecipe("fire", "fire, wood", "how to prepare fire",
-                "add fire to wood");
-        // getAllRecipe();
+        
     }
 
     // saves the recipe objects to the recipes.json file
-    public static void createRecipe(String title, String ingredients, String description, String instructions)
+    public void createRecipe()
             throws ParseException, FileNotFoundException, IOException {
         // converting String into ArrayList
-        ArrayList<String> ingredientItems = new ArrayList<String>(Arrays.asList(ingredients.split("\\s*,\\s*")));
-        ArrayList<String> sbsinstructions = new ArrayList<String>(Arrays.asList(instructions.split("\\s*,\\s*")));
+        ArrayList<String> ingredientItems = new ArrayList<String>(Arrays.asList(this.ingredients.split("\\s*,\\s*")));
+        ArrayList<String> sbsinstructions = new ArrayList<String>(Arrays.asList(this.instructions.split("\\s*,\\s*")));
 
         // each recipe saved as JSON object
         JSONObject recipeDetails = new JSONObject();
-        recipeDetails.put("title", title);
+        recipeDetails.put("title", this.title);
         recipeDetails.put("ingredients", ingredientItems);
-        recipeDetails.put("description", description);
+        recipeDetails.put("description", this.description);
         recipeDetails.put("instructions", sbsinstructions);
 
         // outer object that contains array
@@ -60,11 +52,11 @@ public class Recipe {
         innerArray.add(recipeDetails);
         recipe.put("Recipe", innerArray);
 
-        File f = new File("test.json");
+        File f = new File("recipe.json");
 
  
         JSONParser jsonParser = new JSONParser();
-        Object obj = jsonParser.parse(new FileReader("test.json"));
+        Object obj = jsonParser.parse(new FileReader("recipe.json"));
 
         if (f.exists()) {
             JSONObject jsonObject = (JSONObject) obj;
@@ -75,7 +67,7 @@ public class Recipe {
                 JSONObject it = iterator.next();
                 innerArray.add(it);
             }
-            innerArray.add(recipeDetails);
+            // innerArray.add(recipeDetails);
             recipe.put("Recipe", innerArray);
             try (FileWriter file = new FileWriter(f)){
                 file.write(recipe.toJSONString());
@@ -83,8 +75,7 @@ public class Recipe {
                 e.printStackTrace();
             }
         } else {
-            // Writing to JSON file
-            try (FileWriter file = new FileWriter("test.json")) {
+            try (FileWriter file = new FileWriter("recipe.json")) {
 
                 // We can write any JSONArray or JSONObject instance to the file
                 file.write(recipe.toJSONString());
@@ -96,48 +87,4 @@ public class Recipe {
         }
 
     }
-
-    // public static void getAllRecipe() {
-    // JSONParser jsonParser = new JSONParser();
-
-    // try (FileReader reader = new FileReader("test.json")) {
-    // // Read JSON file
-    // Object obj = jsonParser.parse(reader);
-
-    // JSONArray recipeList = (JSONArray) obj;
-    // System.out.println(recipeList);
-
-    // // Iterate over recipe array
-    // recipeList.forEach(reci -> parseRecipeObject((JSONObject) reci));
-
-    // } catch (FileNotFoundException e) {
-    // e.printStackTrace();
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // } catch (ParseException e) {
-    // e.printStackTrace();
-    // }
-    // }
-
-    // private static void parseRecipeObject(JSONObject recipe) {
-    // // Get recipe object within list
-    // JSONObject recipeObject = (JSONObject) recipe.get("recipe");
-
-    // // Get recipe title
-    // String title = (String) recipeObject.get("title");
-    // System.out.println(title);
-
-    // // Get recipe ingredients
-    // String ingredients = (String) recipeObject.get("ingredients");
-    // System.out.println(ingredients);
-
-    // // Get recipe description
-    // String description = (String) recipeObject.get("description");
-    // System.out.println(description);
-
-    // // Get recipe instruction
-    // String instruction = (String) recipeObject.get("instruction");
-    // System.out.println(instruction);
-    // }
-
 }
