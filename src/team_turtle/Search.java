@@ -27,10 +27,9 @@ class Entry {
 
 public class Search { 
 
-    static ArrayList<Entry> recipeBook; 
+    static ArrayList<Entry> recipeBook = new ArrayList<Entry>(); 
 
     public static void main(String[] args) {
-        recipeBook = new ArrayList<Entry>();
 
         fillRecipeBook();
         for (Entry r : recipeBook) { 
