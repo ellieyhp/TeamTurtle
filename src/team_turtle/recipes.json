@@ -1,20 +1,22 @@
-[
-    { 
-        "title": "rice", 
-        "ingredients": ["water", "rice"], 
-        "description": "this is a recipe for rice", 
-        "instructions": ["1. add water", "2. cook the rice"] 
-    }, 
-    { 
-        "title": "bread", 
-        "ingredients": ["wheat", "flour"], 
-        "description": "this is a recipe for bread", 
-        "instructions": ["1. add wheat", "2. add flour"]
-    }, 
-    { 
-        "title": "bread rice", 
-        "ingredients": ["wheat", "flour"], 
-        "description": "this is a recipe for bread", 
-        "instructions": ["1. add wheat", "2. add flour"]
-    }
-] 
+{ "Recipe": 
+    [
+        { 
+            "title": "rice", 
+            "ingredients": ["water", "rice"], 
+            "description": "this is a recipe for rice", 
+            "instructions": ["1. add water", "2. cook the rice"] 
+        }, 
+        { 
+            "title": "bread", 
+            "ingredients": ["wheat", "flour"], 
+            "description": "this is a recipe for bread", 
+            "instructions": ["1. add wheat", "2. add flour"]
+        }, 
+        { 
+            "title": "bread rice", 
+            "ingredients": ["wheat", "flour"], 
+            "description": "this is a recipe for bread", 
+            "instructions": ["1. add wheat", "2. add flour"]
+        }
+    ] 
+} 
