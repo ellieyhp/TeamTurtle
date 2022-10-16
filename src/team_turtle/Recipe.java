@@ -52,11 +52,11 @@ public class Recipe {
         innerArray.add(recipeDetails);
         recipe.put("Recipe", innerArray);
 
-        File f = new File("recipe.json");
+        File f = new File("recipes.json");
 
  
         JSONParser jsonParser = new JSONParser();
-        Object obj = jsonParser.parse(new FileReader("recipe.json"));
+        Object obj = jsonParser.parse(new FileReader("recipes.json"));
 
         if (f.exists()) {
             JSONObject jsonObject = (JSONObject) obj;
@@ -75,7 +75,7 @@ public class Recipe {
                 e.printStackTrace();
             }
         } else {
-            try (FileWriter file = new FileWriter("recipe.json")) {
+            try (FileWriter file = new FileWriter("recipes.json")) {
 
                 // We can write any JSONArray or JSONObject instance to the file
                 file.write(recipe.toJSONString());

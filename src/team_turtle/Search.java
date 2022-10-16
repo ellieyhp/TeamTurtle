@@ -54,7 +54,9 @@ public class Search {
         
     }
 
-    public static void fillRecipeBook() { 
+    public static void fillRecipeBook() {
+
+        recipeBook = new ArrayList<Entry>();
         
         JSONParser parser = new JSONParser(); 
         
