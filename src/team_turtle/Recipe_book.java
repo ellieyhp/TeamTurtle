@@ -7,18 +7,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import team_turtle.Recipe;
+import org.json.simple.parser.ParseException;
+
 
 public class Recipe_book {
 	
-	HashMap<String, Recipe_entry> rb;
 	
-
-	//make new Recipe Book object
-	Recipe_book() {
-			rb = new HashMap<String,Recipe_entry>();
-	}
-	
-	void init() {
+	void init() throws ParseException{
 
 		JFrame f1 = new JFrame("Recipe Book");
 
@@ -39,12 +34,21 @@ public class Recipe_book {
 				
 				sub.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//Recipe_entry temp = rb.get(key.getText());
-						Recipe_entry temp = Search.search(key.getText());
+						//fill local recipe structure
+						Search.fillRecipeBook();
+
+						ArrayList<Entry> temp = Search.search(key.getText());
 						JFrame pr = new JFrame("textfield");
-						String out;
+						String out = "";
 						if(temp != null) {
-							out = temp.re_print();
+							for (int i = 0; i < temp.size(); i++) {
+								Entry u = temp.get(i);
+								out.concat("Name: "+u.title+"\n"+
+								"Description: "+u.description+"\n"+
+								"Ingredient List: "+u.ingredients+"\n"+
+								"Instructions: "+u.instructions+"\n\n");
+								
+							}
 						}
 						else {
 							out = "Recipe Not Available";
@@ -96,6 +100,10 @@ public class Recipe_book {
 		list.setBounds(150, 300, 300, 120);
 		list.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				//fill local recipe storage
+				Search.fillRecipeBook();
+
 				//print recipes
 				JFrame pr = new JFrame("See All Recipes");
 				String out = "";
@@ -105,9 +113,16 @@ public class Recipe_book {
 				}
 				*/
 
-				for(int i = 0; i < Search.recipeBook.size(); i++) {
-					out = out.concat(Search.recipeBook.get(i)+"\n\n");
+				ArrayList<Entry> temp = Search.recipeBook;
+
+				for (int i = 0; i < temp.size(); i++) {
+					Entry u = temp.get(i);
+					out.concat("Name: "+u.title+"\n"+
+					"Description: "+u.description+"\n"+
+					"Ingredient List: "+u.ingredients+"\n"+
+					"Instructions: "+u.instructions+"\n\n");
 				}
+	
 				JTextArea ldis = new JTextArea(out);
 				JScrollPane scroll = new JScrollPane (ldis, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 						JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -179,7 +194,9 @@ public class Recipe_book {
 							//rb.put(n, re);
 	
 							Recipe r = new Recipe(n,ingl,de,instr);
-							r.Recipe.createRecipe();
+							try{r.createRecipe();
+							}catch(Exception v){
+							v.printStackTrace();}
 
 							tf.dispose();
 						}
@@ -254,7 +271,10 @@ public class Recipe_book {
 	
 	public static void main(String[] args) {
 		Recipe_book rb = new Recipe_book();
-		rb.init();
+
+		try{rb.init();
+		}catch(Exception v){
+		v.printStackTrace();}
 		
 	}
 	
